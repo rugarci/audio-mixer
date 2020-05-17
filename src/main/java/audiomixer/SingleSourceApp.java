@@ -45,13 +45,15 @@ public class SingleSourceApp {
 	public static void main(String[] args) {
 
 		if (args.length != 4) {
-			String exampleArgs = "hw:CARD=SB,DEV=0 50 192.168.8.128 4953";
+			//String exampleArgs = "hw:CARD=SB,DEV=0 50 192.168.8.128 4953";
+			String exampleArgs = "/home/fifo 50 192.168.8.128 4953";
 			System.out.println("Try with " + exampleArgs);
 			return;
 		}
 		SingleSourceApp singleSourceApp = new SingleSourceApp();
 
-		ISource source = new ArecordSource(args[0], Integer.parseInt(args[1]));
+		//ISource source = new ArecordSource(args[0], Integer.parseInt(args[1]));
+		ISource source = new PipeSource(args[0], Integer.parseInt(args[1]));
 		ISink sink = new TcpSink(Collections.singletonList(source), args[2], Integer.parseInt(args[3]));
 
 		singleSourceApp.add(sink);
