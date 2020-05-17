@@ -110,8 +110,7 @@ public abstract class BaseSource implements ISource {
 		if (audioInputStream != null) {
 			try {
 				audioInputStream.readAllBytes();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException ignore) {
 			}
 		}
 	}
@@ -121,8 +120,7 @@ public abstract class BaseSource implements ISource {
 		if (audioInputStream != null) {
 			try {
 				audioInputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException ignore){
 			}
 		}
 	}
