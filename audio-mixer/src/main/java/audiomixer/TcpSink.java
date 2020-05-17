@@ -17,7 +17,7 @@ public class TcpSink extends BaseSink {
 	}
 
 	@Override
-	OutputStream getOutputStream() throws Exception {
+	protected OutputStream getOutputStream() throws Exception {
 		if (socket != null && socket.isConnected()) {
 			try {
 				socket.close();
@@ -29,7 +29,7 @@ public class TcpSink extends BaseSink {
 	}
 
 	@Override
-	String getLocation() {
+	protected String getLocation() {
 		return host + ":" + port;
 	}
 }

@@ -9,14 +9,14 @@ import javax.sound.sampled.AudioSystem;
 
 public abstract class BaseSource implements ISource {
 
-	final int threshold;
-	final AudioFormat audioFormat;
+	private final int threshold;
+	private final AudioFormat audioFormat;
 	private final byte[] buffer;
 
-	long lastOpenTime;
-	boolean silent = false;
-	int soundCount = 0;
-	int silenceCount = 0;
+	private	long lastOpenTime;
+	private boolean silent = false;
+	private int soundCount = 0;
+	private int silenceCount = 0;
 
 	private AudioInputStream audioInputStream;
 
@@ -26,7 +26,7 @@ public abstract class BaseSource implements ISource {
 		buffer = new byte[audioFormat.getFrameSize()];
 	}
 
-	boolean init() throws Exception {
+	private boolean init() throws Exception {
 		if (System.currentTimeMillis() - lastOpenTime < 5000) {
 			return false;
 		}
@@ -46,9 +46,9 @@ public abstract class BaseSource implements ISource {
 		return true;
 	}
 
-	abstract String getLocation();
+	protected abstract String getLocation();
 
-	abstract InputStream getInputStream() throws Exception;
+	protected abstract InputStream getInputStream() throws Exception;
 
 	@Override
 	public byte[] read() {

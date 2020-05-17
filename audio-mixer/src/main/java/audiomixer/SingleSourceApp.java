@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class SingleSourceApp {
 
-	List<ISink> sinks = new ArrayList<>();
+	private final List<ISink> sinks = new ArrayList<>();
 
 	public SingleSourceApp() {
 
-		ISource source = new ArecordSource("hw:CARD=SB,DEV=0", 50);
-		ISink sink = new TcpSink(Collections.singletonList(source), "192.168.8.128", 4953);
+	}
 
+	public void add(ISink sink) {
 		sinks.add(sink);
-		run();
 	}
 
 	public void run() {
@@ -45,7 +43,19 @@ public class SingleSourceApp {
 	}
 
 	public static void main(String[] args) {
-		new SingleSourceApp();
+
+		if (args.length != 4) {
+			String exampleArgs = "hw:CARD=SB,DEV=0 50 192.168.8.128 4953";
+			System.out.println("Try with " + exampleArgs);
+			return;
+		}
+		SingleSourceApp singleSourceApp = new SingleSourceApp();
+
+		ISource source = new ArecordSource(args[0], Integer.parseInt(args[1]));
+		ISink sink = new TcpSink(Collections.singletonList(source), args[2], Integer.parseInt(args[3]));
+
+		singleSourceApp.add(sink);
+		singleSourceApp.run();
 	}
 
 }

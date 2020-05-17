@@ -3,12 +3,11 @@ package audiomixer;
 import java.io.OutputStream;
 import java.util.List;
 
-
 public abstract class BaseSink implements ISink {
 
-	private long lastOpenTime;
+	private final List<ISource> sources;
 
-	private List<ISource> sources;
+	private long lastOpenTime;
 
 	private OutputStream outputStream;
 
@@ -28,8 +27,9 @@ public abstract class BaseSink implements ISink {
 		return true;
 	}
 
-	abstract String getLocation();
-	abstract OutputStream getOutputStream() throws Exception;
+	protected abstract String getLocation();
+
+	protected abstract OutputStream getOutputStream() throws Exception;
 
 	@Override
 	public List<ISource> getSources() {
@@ -49,7 +49,6 @@ public abstract class BaseSink implements ISink {
 					return;
 				}
 			}
-			// System.out.println("write " + frame [0]);
 			outputStream.write(frame);
 		} catch (Exception e) {
 

@@ -18,7 +18,7 @@ public class PipeSource extends BaseSource {
 	}
 
 	@Override
-	InputStream getInputStream() throws Exception {
+	protected InputStream getInputStream() throws Exception {
 		File file = new File(pipePath);
 
 		if (!file.exists()) {
@@ -29,7 +29,7 @@ public class PipeSource extends BaseSource {
 	}
 
 	@Override
-	String getLocation() {
+	protected String getLocation() {
 		return pipePath;
 	}
 

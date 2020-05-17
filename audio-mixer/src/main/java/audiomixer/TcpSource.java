@@ -57,7 +57,7 @@ public class TcpSource extends BaseSource {
 	}
 
 	@Override
-	InputStream getInputStream() throws Exception {
+	protected InputStream getInputStream() throws Exception {
 		if (socket == null || socket.isClosed()) {
 			return null;
 		}
@@ -65,7 +65,7 @@ public class TcpSource extends BaseSource {
 	}
 
 	@Override
-	String getLocation() {
+	protected String getLocation() {
 		return "tcp://0.0.0.0:" + port;
 	}
 

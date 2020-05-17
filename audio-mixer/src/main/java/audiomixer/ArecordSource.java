@@ -4,8 +4,8 @@ import java.io.InputStream;
 
 public class ArecordSource extends BaseSource {
 
-	final String device;
-	Process process;
+	private final String device;
+	private Process process;
 
 	public ArecordSource(String device, int threshold) {
 		super(threshold);
@@ -13,14 +13,13 @@ public class ArecordSource extends BaseSource {
 	}
 
 	@Override
-	InputStream getInputStream() throws Exception {
-		process = new ProcessBuilder("bash", "-c", "/usr/bin/arecord --device=" + device + " --format=S16_LE --rate="
-				+ (int) audioFormat.getFrameRate() + " --channels=" + audioFormat.getChannels()).start();
+	protected InputStream getInputStream() throws Exception {
+		process = new ProcessBuilder("bash", "-c", "/usr/bin/arecord --device=" + device + " --format=S16_LE --rate=48000 --channels=2").start();
 		return process.getInputStream();
 	}
 
 	@Override
-	String getLocation() {
+	protected String getLocation() {
 		return "arecord " + device;
 	}
 
