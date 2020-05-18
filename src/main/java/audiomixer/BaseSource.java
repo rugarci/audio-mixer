@@ -66,7 +66,7 @@ public abstract class BaseSource implements ISource {
 				audioInputStream.read(buffer);
 				int level = getFrameLevel(buffer, 0);
 
-				 System.out.println("level " + level);
+				//System.out.println("level " + level);
 
 				if (level > threshold) {
 					soundCount++;
